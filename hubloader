@@ -1,1 +1,19 @@
-xd
+--MainGame
+if game.PlaceId == 2809202155 then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Vezise/vezzyscripts/main/sbrgui"))()
+--SbrMode
+elseif game.PlaceId == 4643697430 then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Vezise/vezzyscripts/main/sbrgui"))()
+--1v1Mode
+elseif game.PlaceId == 5290908008 then
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Vezise/vezzyscripts/main/yba-colosseum"))()
+else
+print("----------------------------------------------------------")
+print("Loaded Successfuly.. checking game: ".. game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name)
+print("----------------------------------------------------------")
+game:GetService("StarterGui"):SetCore("SendNotification", {
+    Title = "SiBin Script Hub"; 
+    Text = "This game is not compatible";
+    Icon = "rbxthumb://type=Asset&id=10025278911&w=150&h=150";
+})
+end
