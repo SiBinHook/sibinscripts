@@ -22,9 +22,9 @@ local Settings = {
        
 	},
 	Tracers = false,
-	Circles = true,
-	Distance = true,
-	Notify = true
+	Circles = false,
+	Distance = false,
+	Notify = false
 }
 
 local function notify(a)
