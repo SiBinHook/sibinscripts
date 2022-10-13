@@ -594,6 +594,130 @@ end
             end)
 		end
 		
+		function PageItens:Slider(text, mimvalue, maxvalue, callback)
+        
+        text = text or "Slider"
+        mimvalue = mimvalue or 0
+        maxvalue = maxvalue or 100
+        local mouse = game.Players.LocalPlayer:GetMouse()
+        local uis = game:GetService("UserInputService")
+        local Value;
+        callback = callback or function() end  
+        
+        local Slider = Instance.new("Frame")
+        local UICorner = Instance.new("UICorner")
+        local SliderN = Instance.new("TextLabel")
+        local Frame = Instance.new("Frame")
+        local UICorner_2 = Instance.new("UICorner")
+        local Frame_2 = Instance.new("Frame")
+        local UICorner_3 = Instance.new("UICorner")
+        --local TextButton = Instance.new("TextButton")
+        --local TextButton_Roundify_8px = Instance.new("ImageLabel")
+        local SliderNun = Instance.new("TextLabel")
+
+        Slider.Name = "Slider"
+        Slider.Parent = game.StarterGui.SiBinUi.MainFrame.allFrames.Page
+        Slider.BackgroundColor3 = Color3.fromRGB(45, 43, 41)
+        Slider.Size = UDim2.new(0, 393, 0, 43)
+        
+        UICorner.Parent = Slider
+        
+        SliderN.Name = "SliderN"
+        SliderN.Parent = Slider
+        SliderN.BackgroundColor3 = Color3.fromRGB(34, 32, 31)
+        SliderN.BackgroundTransparency = 1.000
+        SliderN.Position = UDim2.new(0.0445544571, 0, 0.11704272, 0)
+        SliderN.Size = UDim2.new(0, 144, 0, 17)
+        SliderN.Font = Enum.Font.SourceSans
+        SliderN.Text = text
+        SliderN.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SliderN.TextSize = 30.000
+        SliderN.TextWrapped = true
+        SliderN.TextXAlignment = Enum.TextXAlignment.Left
+        
+        Frame.Parent = Slider
+        Frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        Frame.Position = UDim2.new(0.0445544198, 0, 0.674418628, 0)
+        Frame.Size = UDim2.new(0, 369, 0, 7)
+        
+        UICorner_2.CornerRadius = UDim.new(0, 30)
+        UICorner_2.Parent = Frame
+        
+        Frame_2.Parent = Frame
+        Frame_2.BackgroundColor3 = Color3.fromRGB(0, 222, 130)
+        Frame_2.Size = UDim2.new(0, 197, 0, 7)
+        
+        UICorner_3.CornerRadius = UDim.new(0, 30)
+        UICorner_3.Parent = Frame_2
+        
+        TextButton.Parent = Frame_2
+        TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TextButton.BackgroundTransparency = 1.000
+        TextButton.BorderSizePixel = 0
+        TextButton.Position = UDim2.new(0.966563582, 0, -0.571428597, 0)
+        TextButton.Size = UDim2.new(0, 14, 0, 15)
+        TextButton.Font = Enum.Font.SourceSans
+        TextButton.Text = ""
+        TextButton.TextColor3 = Color3.fromRGB(0, 0, 0)
+        TextButton.TextSize = 14.000
+        
+        TextButton_Roundify_8px.Name = "TextButton_Roundify_8px"
+        TextButton_Roundify_8px.Parent = TextButton
+        TextButton_Roundify_8px.Active = true
+        TextButton_Roundify_8px.AnchorPoint = Vector2.new(0.5, 0.5)
+        TextButton_Roundify_8px.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TextButton_Roundify_8px.BackgroundTransparency = 1.000
+        TextButton_Roundify_8px.Position = UDim2.new(0.544101954, 0, 0.530180871, 0)
+        TextButton_Roundify_8px.Selectable = true
+        TextButton_Roundify_8px.Size = UDim2.new(0.915082932, 0, 0.975533843, 0)
+        TextButton_Roundify_8px.Image = "rbxassetid://3570695787"
+        TextButton_Roundify_8px.ImageColor3 = Color3.fromRGB(0, 222, 130)
+        TextButton_Roundify_8px.ScaleType = Enum.ScaleType.Slice
+        TextButton_Roundify_8px.SliceCenter = Rect.new(100, 100, 100, 100)
+        TextButton_Roundify_8px.SliceScale = 0.667
+        
+        SliderNun.Name = "SliderNun"
+        SliderNun.Parent = Slider
+        SliderNun.BackgroundColor3 = Color3.fromRGB(34, 32, 31)
+        SliderNun.BackgroundTransparency = 1.000
+        SliderNun.Position = UDim2.new(0.610000014, 0, 0.11704272, 0)
+        SliderNun.Size = UDim2.new(0, 144, 0, 17)
+        SliderNun.Font = Enum.Font.SourceSans
+        SliderNun.Text = "50"
+        SliderNun.TextColor3 = Color3.fromRGB(255, 255, 255)
+        SliderNun.TextSize = 30.000
+        SliderNun.TextWrapped = true
+        SliderNun.TextXAlignment = Enum.TextXAlignment.Right
+        
+        TextButton.MouseButton1Down:Connect(function()
+    Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue)) or 0
+    pcall(function()
+        callback(Value)
+    end)
+    Frame_2.Size = UDim2.new(0, math.clamp(mouse.X - Frame_2.AbsolutePosition.X, 0, 318), 0, 16)
+    moveconnection = mouse.Move:Connect(function()
+        SliderNun.Text = Value
+        Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue))
+        pcall(function()
+            callback(Value)
+        end)
+        Frame_2.Size = UDim2.new(0, math.clamp(mouse.X - Frame_2.AbsolutePosition.X, 0, 318), 0, 16)
+    end)
+    releaseconnection = uis.InputEnded:Connect(function(Mouse)
+        if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+            Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue))
+            pcall(function()
+                callback(Value)
+            end)
+            Frame_2.Size = UDim2.new(0, math.clamp(mouse.X - Frame_2.AbsolutePosition.X, 0, 318), 0, 16)
+            moveconnection:Disconnect()
+            releaseconnection:Disconnect()
+        end
+    end)
+end)
+        
+		end
+		
     end
            return PageItens
 	end
