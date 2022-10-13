@@ -616,7 +616,7 @@ end
         local SliderNun = Instance.new("TextLabel")
 
         Slider.Name = "Slider"
-        Slider.Parent = game.StarterGui.SiBinUi.MainFrame.allFrames.Page
+        Slider.Parent = Page
         Slider.BackgroundColor3 = Color3.fromRGB(45, 43, 41)
         Slider.Size = UDim2.new(0, 393, 0, 43)
         
