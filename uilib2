@@ -611,8 +611,8 @@ end
         local UICorner_2 = Instance.new("UICorner")
         local Frame_2 = Instance.new("Frame")
         local UICorner_3 = Instance.new("UICorner")
-        --local TextButton = Instance.new("TextButton")
-        --local TextButton_Roundify_8px = Instance.new("ImageLabel")
+        local TextButton = Instance.new("TextButton")
+        local TextButton_Roundify_8px = Instance.new("ImageLabel")
         local SliderNun = Instance.new("TextLabel")
 
         Slider.Name = "Slider"
@@ -690,28 +690,28 @@ end
         SliderNun.TextXAlignment = Enum.TextXAlignment.Right
         
         TextButton.MouseButton1Down:Connect(function()
-    Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue)) or 0
-    pcall(function()
-        callback(Value)
-    end)
-    Frame_2.Size = UDim2.new(0, math.clamp(mouse.X - Frame_2.AbsolutePosition.X, 0, 318), 0, 16)
-    moveconnection = mouse.Move:Connect(function()
-        SliderNun.Text = Value
-        Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue))
+        Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue)) or 0
         pcall(function()
             callback(Value)
         end)
         Frame_2.Size = UDim2.new(0, math.clamp(mouse.X - Frame_2.AbsolutePosition.X, 0, 318), 0, 16)
-    end)
-    releaseconnection = uis.InputEnded:Connect(function(Mouse)
-        if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+        moveconnection = mouse.Move:Connect(function()
+            SliderNun.Text = Value
             Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue))
             pcall(function()
                 callback(Value)
             end)
             Frame_2.Size = UDim2.new(0, math.clamp(mouse.X - Frame_2.AbsolutePosition.X, 0, 318), 0, 16)
-            moveconnection:Disconnect()
-            releaseconnection:Disconnect()
+        end)
+        releaseconnection = uis.InputEnded:Connect(function(Mouse)
+            if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
+                Value = math.floor((((tonumber(maxvalue) - tonumber(minvalue)) / 318) * Frame_2.AbsoluteSize.X) + tonumber(minvalue))
+                pcall(function()
+                    callback(Value)
+                end)
+                Frame_2.Size = UDim2.new(0, math.clamp(mouse.X - Frame_2.AbsolutePosition.X, 0, 318), 0, 16)
+                moveconnection:Disconnect()
+                releaseconnection:Disconnect()
         end
     end)
 end)
